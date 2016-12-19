@@ -7,45 +7,52 @@
 </head>
 
 <body>
-    <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
-
     <div class="controls">
-        <label for="spacing">Spacing:</label>
+        <label for="spacing">spacing:</label>
         <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
 
-        <label for="blur">Blur:</label>
+        <label for="blur">blur:</label>
         <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
 
-        <label for="base">Base Color</label>
-        <input type="color" name="base" value="#ffc600">
+        <label for="base">color</label>
+        <input type="color" name="base" value="#FF3D00">
     </div>
 
-    <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+    <img src="http://68.media.tumblr.com/1e117292d1c3183d4c3c2f35dee88b67/tumblr_nk7all1bCa1rnqolfo1_500.png">
 
     <style>
          :root {
-            --base: #ffc600;
-            --spacing: 10px;
+            --base: #FF3D00;
+            --spacing: 20px;
             --blur: 10px;
         }
 
         img {
+            width: 500px;
             padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+        }
+
+        .h1 {
+
+          color: var(--base);
         }
         /*
       misc styles, nothing to do with CSS variables
     */
+
 
         body {
             text-align: center;
         }
 
         body {
-            background: #193549;
-            color: white;
-            font-family: 'helvetica neue', sans-serif;
+            background: #FFEB3B;
+            color: #37474F;
+            font-family: 'roboto', 'helvetica neue', sans-serif;
             font-weight: 100;
-            font-size: 50px;
+            font-size: 40px;
         }
 
         .controls {
@@ -63,6 +70,16 @@
     </style>
 
     <script>
+      const inputs = document.querySelectorAll('.controls input');
+
+      function handleUpdate() {
+        const suffix = this.dataset.sizing || '';
+        document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+      }
+
+      inputs.forEach(input => input.addEventListener('change', handleUpdate));
+      inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
     </script>
 
 </body>
